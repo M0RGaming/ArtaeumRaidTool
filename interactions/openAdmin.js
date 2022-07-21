@@ -1,3 +1,5 @@
+const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } = require('discord.js');
+
 module.exports = {
 
     id: "admin",
