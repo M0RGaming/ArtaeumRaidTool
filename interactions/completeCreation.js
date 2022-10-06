@@ -11,6 +11,8 @@ module.exports = {
         const date = interaction.fields.getTextInputValue('date')
 
 
+        let user = interaction.user.username
+        let userID = interaction.user.id
 
 
         let dpsLim = 0
@@ -35,24 +37,18 @@ module.exports = {
         let embed = {
             "title": name,
             "color": 65535,
-            "description": desc.replace("\\n","\n"),
+            "description": desc ? desc.replace("\\n","\n") : "​",
             "timestamp": "",
             "author": {
                 "name": ""
             },
             "image": {},
             "thumbnail": {},
-            /* // Possible option for storing data
-            "footer": {
-                text: 'Some footer text here',
-                icon_url: 'https://upload.wikimedia.org/wikipedia/en/d/d2/Blank.png?DATAGOESHERE'
-            },
-            //*/
-            "footer": {},
+            "footer": {text: `Raid Lead: @${user} <@${userID}>\nRaid Lead can open the Admin Panel via the apps menu after right clicking`},
             "fields": [
                 {
                     "name": "Date",
-                    "value": date
+                    "value": date ? date : "​"
                 },
                 {
                     "name": dpsLim ? `DPS (0/${dpsLim})` : "DPS (0)",
@@ -113,8 +109,8 @@ module.exports = {
                     .setPlaceholder('Select your role to Sign Up!')
                     .addOptions([
                         {
-                            label: 'Magicka DPS',
-                            description: 'Sign up as a Magicka Based Damage Dealer',
+                            label: 'Ranged DPS',
+                            description: 'Sign up as a primarily Ranged Damage Dealer',
                             value: 'mdps',
                             emoji: {
                                 name: "magDPS",
@@ -122,8 +118,8 @@ module.exports = {
                             }
                         },
                         {
-                            label: 'Stamina DPS',
-                            description: 'Sign up as a Stamina Based Damage Dealer',
+                            label: 'Melee DPS',
+                            description: 'Sign up as a primarily Melee Damage Dealer',
                             value: 'sdps',
                             emoji: {
                                 name: "stamDPS",
@@ -231,24 +227,21 @@ module.exports = {
                         },
                     ]),
             );
+        /*
         const buttons = new MessageActionRow()
             .addComponents(
                 new MessageButton()
-                    .setCustomId('sets')
-                    .setLabel('Select Support Sets')
+                    .setCustomId('note')
+                    .setLabel('Edit Player Note')
                     .setStyle('SECONDARY'),
-                new MessageButton()
-                    .setCustomId('ping')
-                    .setLabel('Toggle Ping Before Raid')
-                    .setStyle('PRIMARY'),
                 new MessageButton()
                     .setCustomId('admin')
                     .setLabel('Open Admin Panel')
                     .setStyle('DANGER'),
             );
-
+        */
         //return interaction.reply(`Event ${name} with description ${desc} and date <t:${date}>`);
-        return interaction.reply({ embeds: [embed], components: [role, classes, buttons] })
+        return interaction.reply({ embeds: [embed], components: [role, classes] })
     }
 
 

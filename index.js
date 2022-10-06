@@ -29,7 +29,7 @@ for (const file of interactionFiles) {
 
 
 client.on('interactionCreate', async interaction => {
-	if (interaction.isCommand()) {
+	if (interaction.isCommand() || interaction.isMessageContextMenu()) {
 
 		const command = client.commands.get(interaction.commandName);
 
@@ -55,7 +55,7 @@ client.on('interactionCreate', async interaction => {
 		}
 
 	} else {
-		return;
+
 	}
 
 

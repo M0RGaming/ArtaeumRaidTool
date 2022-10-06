@@ -48,7 +48,7 @@ module.exports = {
 
         if (copyFrom) {
             interaction.channel.messages.fetch(copyFrom).then(msg => {
-                console.log(msg)
+                //console.log(msg)
 
                 if (msg.author.id !== process.env.id) {
                     return interaction.reply({ content: `The message to copy from is not sent by Artaeum Raid Tool!`, ephemeral: true })
