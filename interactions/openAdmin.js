@@ -13,7 +13,7 @@ module.exports = {
             let embed = new Embed()
             embed.setDescription(`This is the admin panel for raid: ${originalEmbed.title}`)
             embed.setFooter({text: `Roster ID: ${interaction.message.id}`})
-
+            console.log("ADMIN")
             const buttons = new MessageActionRow()
                 .addComponents(
                     new MessageButton()

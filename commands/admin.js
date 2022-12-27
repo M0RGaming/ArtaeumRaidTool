@@ -48,6 +48,10 @@ module.exports = {
                             .setCustomId('adminCopy')
                             .setLabel('Create Copy of Roster')
                             .setStyle('PRIMARY'),
+                        new MessageButton()
+                            .setCustomId('adminEdit')
+                            .setLabel('Edit Roster Message')
+                            .setStyle('SECONDARY')
                     );
 
                 return interaction.reply({

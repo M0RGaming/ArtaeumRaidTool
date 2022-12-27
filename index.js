@@ -5,7 +5,7 @@ const token = process.env.token
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.login(token);
 client.once('ready', () => {
-	console.log('Ready!');
+	console.log(`Ready! Logged in as ${client.user.username}.`);
 });
 
 
