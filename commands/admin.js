@@ -43,20 +43,27 @@ module.exports = {
                         new MessageButton()
                             .setCustomId('adminRole')
                             .setLabel('Change User Role')
-                            .setStyle('DANGER'),
+                            .setStyle('DANGER'))
+
+                const buttons2 = new MessageActionRow()
+                    .addComponents(
+                        new MessageButton()
+                            .setCustomId('adminEdit')
+                            .setLabel('Edit Roster Message')
+                            .setStyle('SECONDARY'),
                         new MessageButton()
                             .setCustomId('adminCopy')
                             .setLabel('Create Copy of Roster')
                             .setStyle('PRIMARY'),
                         new MessageButton()
-                            .setCustomId('adminEdit')
-                            .setLabel('Edit Roster Message')
-                            .setStyle('SECONDARY')
+                            .setCustomId('adminDelete')
+                            .setLabel('Delete Roster Message')
+                            .setStyle('DANGER')
                     );
 
                 return interaction.reply({
                     embeds: [embed],
-                    components: [buttons],
+                    components: [buttons,buttons2],
                     ephemeral: true
                 })
 
