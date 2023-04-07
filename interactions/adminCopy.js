@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, TextInputComponent, Modal} = require('discord.js');
+const { ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder} = require('discord.js');
 
 module.exports = {
 
@@ -12,24 +11,24 @@ module.exports = {
 
 
         interaction.channel.messages.fetch(editMessage).then(msg => {
-            const modal = new Modal()
+            const modal = new ModalBuilder()
                 .setCustomId('createModal')
                 .setTitle('Artaeum Raid Tool: Creation');
 
-            const name = new TextInputComponent()
+            const name = new TextInputBuilder()
                 .setCustomId('name')
                 .setLabel("What is the name of the raid?")
-                .setStyle('SHORT')
+                .setStyle(TextInputStyle.Short)
                 .setRequired(true);
-            const description = new TextInputComponent()
+            const description = new TextInputBuilder()
                 .setCustomId('description')
                 .setLabel("What is the raid about?")
-                .setStyle('PARAGRAPH');
+                .setStyle(TextInputStyle.Paragraph);
 
-            const date = new TextInputComponent()
+            const date = new TextInputBuilder()
                 .setCustomId('date')
                 .setLabel("When is the raid?")
-                .setStyle('SHORT');
+                .setStyle(TextInputStyle.Short);
 
             name.setValue(msg.embeds[0].title)
             description.setValue(msg.embeds[0].description)
@@ -37,17 +36,17 @@ module.exports = {
             let oldDate = msg.embeds[0].fields[0].value
             date.setValue(oldDate)
 
-            const copyFromModal = new TextInputComponent()
+            const copyFromModal = new TextInputBuilder()
                 .setCustomId('copyfrom')
                 .setLabel("What message should the roster be copied from")
-                .setStyle('SHORT')
+                .setStyle(TextInputStyle.Short)
                 .setValue(editMessage)
 
             modal.addComponents(
-                new MessageActionRow().addComponents(name),
-                new MessageActionRow().addComponents(description),
-                new MessageActionRow().addComponents(date),
-                new MessageActionRow().addComponents(copyFromModal)
+                new ActionRowBuilder().addComponents(name),
+                new ActionRowBuilder().addComponents(description),
+                new ActionRowBuilder().addComponents(date),
+                new ActionRowBuilder().addComponents(copyFromModal)
             );
 
             return interaction.showModal(modal);

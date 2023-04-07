@@ -1,6 +1,3 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, TextInputComponent, Modal} = require('discord.js');
-
 module.exports = {
 
     id: "adminDeleteConfirm",

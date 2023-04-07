@@ -1,3 +1,4 @@
+const {EmbedBuilder} = require("discord.js");
 module.exports.getVals = (embed) => {
     let out = {}
     let regexIn = /(❓|⌛|.*?) <@(.*?)>/gm
@@ -37,8 +38,9 @@ module.exports.getVals = (embed) => {
 }
 
 
-module.exports.parseVals = (embed, vals) => {
-    let fields = embed.fields
+module.exports.parseVals = (oldEmbed, vals) => {
+    newEmbed = EmbedBuilder.from(oldEmbed);
+    let fields = oldEmbed.fields
     fields[1].value = vals.dps.map(x => `${x[0]} <@${x[1]}>`).join('\n')
     fields[2].value = vals.heal.map(x => `${x[0]} <@${x[1]}>`).join('\n')
     fields[3].value = vals.tank.map(x => `${x[0]} <@${x[1]}>`).join('\n')
@@ -55,6 +57,6 @@ module.exports.parseVals = (embed, vals) => {
     for (let x of fields) {
         if (x.value == '') x.value = '\u200b';
     }
-    embed.setFields(fields)
-    return embed
+    newEmbed.setFields(fields)
+    return newEmbed
 }

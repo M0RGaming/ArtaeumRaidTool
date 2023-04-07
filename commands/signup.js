@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, Modal, TextInputComponent} = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, Modal, TextInputComponent, EmbedBuilder} = require('discord.js');
 const { parseVals, getVals } = require('../commonFunctions.js')
 
 let emotes = {
@@ -31,15 +31,17 @@ module.exports = {
             option.setName('role')
                 .setDescription("Which Role would you like to sign up for?")
                 .setRequired(true)
-                .addChoice('Magicka DPS', 'mdps')
-                .addChoice('Stamina DPS', 'sdps')
-                .addChoice('Healer', 'heal')
-                .addChoice('Tank', 'tank')
-                .addChoice('Unregister', 'remove'))
+                .addChoices(
+                    {name:'Magicka DPS',value:'mdps'},
+                    {name:'Stamina DPS',value:'sdps'},
+                    {name:'Healer',value:'heal'},
+                    {name:'Tank',value:'tank'},
+                    {name:'Unregister',value:'remove'},
+                ))
         .addUserOption( option => option.setName('user').setDescription("Who would you like to sign up for this raid?").setRequired(false)),
 
     async execute(interaction) {
-        
+
         let role = interaction.options.getString('role')
         let emote = roleEmotes[role]
 
@@ -53,6 +55,7 @@ module.exports = {
 
             let embed = msg.embeds[0]
             let fields = getVals(embed)
+
             let user = String(interaction.user.id)
             if (interaction.options.getUser('user')) {
                 user = String(interaction.options.getUser('user').id)
@@ -110,7 +113,7 @@ module.exports = {
             }
 
             interaction.channel.messages.fetch(roster).then(msg => {
-                msg.edit({embeds: [parseVals(embed,fields)]})
+                msg.edit({embeds: [parseVals(embed, fields)]})
                 let output = `${emote} <@${user}> has been signed up!`
                 if (role == "remove") {
                     output = `<@${user}> has been removed from the roster!`
@@ -119,6 +122,6 @@ module.exports = {
             })
 
         })
-        
+
     }
 }

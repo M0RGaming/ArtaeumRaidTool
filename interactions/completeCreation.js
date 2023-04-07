@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder} = require('discord.js');
 
 module.exports = {
 
@@ -102,12 +101,13 @@ module.exports = {
 
         }
 
-        const role = new MessageActionRow()
+        const role = new ActionRowBuilder()
             .addComponents(
-                new MessageSelectMenu()
+                new StringSelectMenuBuilder()
                     .setCustomId('role')
                     .setPlaceholder('Select your role to Sign Up!')
                     .addOptions([
+                        StringSelectMenuOptionBuilder.from(
                         {
                             label: 'Ranged DPS',
                             description: 'Sign up as a primarily Ranged Damage Dealer',
@@ -116,8 +116,8 @@ module.exports = {
                                 name: "magDPS",
                                 id: "777982060320391219"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Melee DPS',
                             description: 'Sign up as a primarily Melee Damage Dealer',
                             value: 'sdps',
@@ -125,8 +125,8 @@ module.exports = {
                                 name: "stamDPS",
                                 id: "777982060622905375"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from( {
                             label: 'Healer',
                             description: 'Sign up as a Healer',
                             value: 'heal',
@@ -134,8 +134,8 @@ module.exports = {
                                 name: "heal",
                                 id: "777982060433375293"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Tank',
                             description: 'Sign up as a Tank',
                             value: 'tank',
@@ -143,8 +143,8 @@ module.exports = {
                                 name: "tank",
                                 id: "777982060647415818"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Remove From Roster',
                             description: 'Unregister from the raid.',
                             value: 'remove',
@@ -152,16 +152,16 @@ module.exports = {
                                 name: "⛔",
                                 id: null
                             }
-                        },
+                        }),
                     ]),
             );
-        const classes = new MessageActionRow()
+        const classes = new ActionRowBuilder()
             .addComponents(
-                new MessageSelectMenu()
+                new StringSelectMenuBuilder()
                     .setCustomId('class')
                     .setPlaceholder('Select your class! (Optional)')
                     .addOptions([
-                        {
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Sorcerer',
                             description: 'Mark yourself as a Sorcerer.',
                             value: 'sorc',
@@ -169,8 +169,8 @@ module.exports = {
                                 name: "sorc",
                                 id: "776723019652792320"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Templar',
                             description: 'Mark yourself as a Templar.',
                             value: 'templar',
@@ -178,8 +178,8 @@ module.exports = {
                                 name: "templar",
                                 id: "776723019652530186"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Nightblade',
                             description: 'Mark yourself as a NB.',
                             value: 'nb',
@@ -187,8 +187,8 @@ module.exports = {
                                 name: "nb",
                                 id: "776723019283431456"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Warden',
                             description: 'Mark yourself as a Warden.',
                             value: 'warden',
@@ -196,8 +196,8 @@ module.exports = {
                                 name: "warden",
                                 id: "776723019422367744"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Necromancer',
                             description: 'Mark yourself as a Necromancer.',
                             value: 'necro',
@@ -205,8 +205,8 @@ module.exports = {
                                 name: "necro",
                                 id: "776723019585552405"
                             }
-                        },
-                        {
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Dragonknight',
                             description: 'Mark yourself as a DK.',
                             value: 'dk',
@@ -214,9 +214,9 @@ module.exports = {
                                 name: "dk",
                                 id: "776723019489083402"
                             }
-                        },
+                        }),
 
-                        {
+                        StringSelectMenuOptionBuilder.from({
                             label: 'No Class',
                             description: 'Class not specified',
                             value: 'remove',
@@ -224,23 +224,9 @@ module.exports = {
                                 name: "⛔",
                                 id: null
                             }
-                        },
+                        }),
                     ]),
             );
-        /*
-        const buttons = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('note')
-                    .setLabel('Edit Player Note')
-                    .setStyle('SECONDARY'),
-                new MessageButton()
-                    .setCustomId('admin')
-                    .setLabel('Open Admin Panel')
-                    .setStyle('DANGER'),
-            );
-        */
-        //return interaction.reply(`Event ${name} with description ${desc} and date <t:${date}>`);
         return interaction.reply({ embeds: [embed], components: [role, classes] })
     }
 

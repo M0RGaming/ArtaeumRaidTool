@@ -1,5 +1,6 @@
-const { SlashCommandBuilder, Embed} = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, TextInputComponent, Modal} = require('discord.js');
+const {
+    EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle
+} = require('discord.js');
 
 module.exports = {
 
@@ -14,16 +15,16 @@ module.exports = {
         let rosterName = regex.exec(description)[1]
 
 
-        let embed = new Embed()
+        let embed = new EmbedBuilder()
         embed.setDescription(`Are you absolutely sure you wish to delete ${rosterName}?\nThis process is permanent and cannot be undone.\n\nIf you do not want to delete this roster, press the Dismiss Message blue text at the bottom.`)
         embed.setFooter(footer)
 
-        const buttons = new MessageActionRow()
+        const buttons = new ActionRowBuilder()
             .addComponents(
-                new MessageButton()
+                new ButtonBuilder()
                     .setCustomId('adminDeleteConfirm')
                     .setLabel(`Yes, I Am Sure.`)
-                    .setStyle('DANGER'))
+                    .setStyle(ButtonStyle.Danger))
 
 
         return interaction.reply({

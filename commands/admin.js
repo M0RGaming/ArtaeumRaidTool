@@ -1,6 +1,4 @@
-const {MessageActionRow, MessageButton} = require('discord.js');
-const {Embed, ContextMenuCommandBuilder} = require("@discordjs/builders");
-const {ApplicationCommandType} = require("discord-api-types/v8");
+const {EmbedBuilder, ActionRowBuilder, ButtonBuilder, ContextMenuCommandBuilder, ApplicationCommandType, ButtonStyle} = require('discord.js');
 
 module.exports = {
 
@@ -26,39 +24,39 @@ module.exports = {
             let regex = /<@(.*?)>/g
             if (user === regex.exec(originalEmbed.footer.text)[1]) {
 
-                let embed = new Embed()
+                let embed = new EmbedBuilder()
                 embed.setDescription(`This is the admin panel for raid: ${originalEmbed.title}`)
                 embed.setFooter({text: `Roster ID: ${message.id}`})
 
-                const buttons = new MessageActionRow()
+                const buttons = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setCustomId('adminNote')
                             .setLabel('Edit Player Note')
-                            .setStyle('SECONDARY'),
-                        new MessageButton()
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
                             .setCustomId('adminPing')
                             .setLabel('Ping Signed Up People')
-                            .setStyle('SUCCESS'),
-                        new MessageButton()
+                            .setStyle(ButtonStyle.Success),
+                        new ButtonBuilder()
                             .setCustomId('adminRole')
                             .setLabel('Change User Role')
-                            .setStyle('DANGER'))
+                            .setStyle(ButtonStyle.Danger))
 
-                const buttons2 = new MessageActionRow()
+                const buttons2 = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setCustomId('adminEdit')
                             .setLabel('Edit Roster Message')
-                            .setStyle('SECONDARY'),
-                        new MessageButton()
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
                             .setCustomId('adminCopy')
                             .setLabel('Create Copy of Roster')
-                            .setStyle('PRIMARY'),
-                        new MessageButton()
+                            .setStyle(ButtonStyle.Primary),
+                        new ButtonBuilder()
                             .setCustomId('adminDelete')
                             .setLabel('Delete Roster Message')
-                            .setStyle('DANGER')
+                            .setStyle(ButtonStyle.Danger)
                     );
 
                 return interaction.reply({
@@ -74,7 +72,7 @@ module.exports = {
                 })
             }
         } catch (e) {
-            //console.log(e)
+            console.log(e)
             return interaction.reply({ content: `Unable to open the admin panel for this message!`, ephemeral: true })
         }
     }

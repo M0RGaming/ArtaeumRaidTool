@@ -1,8 +1,8 @@
 const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const token = process.env.token
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.login(token);
 client.once('ready', () => {
 	console.log(`Ready! Logged in as ${client.user.username}.`);
@@ -29,7 +29,7 @@ for (const file of interactionFiles) {
 
 
 client.on('interactionCreate', async interaction => {
-	if (interaction.isCommand() || interaction.isMessageContextMenu()) {
+	if (interaction.isCommand() || interaction.isMessageContextMenuCommand()) {
 
 		const command = client.commands.get(interaction.commandName);
 
@@ -41,7 +41,7 @@ client.on('interactionCreate', async interaction => {
 			console.error(error);
 			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 		}
-	} else if (interaction.isButton() || interaction.isSelectMenu() || interaction.isModalSubmit()) {
+	} else if (interaction.isButton() || interaction.isStringSelectMenu() || interaction.isModalSubmit()) {
 
 		const action = client.interactions.get(interaction.customId);
 

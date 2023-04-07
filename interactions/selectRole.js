@@ -1,5 +1,3 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } = require('discord.js');
 const { parseVals, getVals } = require('../commonFunctions.js')
 
 const emotes = {
@@ -17,9 +15,6 @@ module.exports = {
 		let userRoles = interaction.member._roles
 
 
-
-		//interaction.deferUpdate()
-		//interaction.deferReply()
 		// interaction is type SelectMenuInteraction https://discord.js.org/#/docs/main/stable/class/SelectMenuInteraction
 		let embed = interaction.message.embeds[0]
 		let user = String(interaction.user.id)
