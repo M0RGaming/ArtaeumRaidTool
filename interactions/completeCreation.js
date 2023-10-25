@@ -171,6 +171,15 @@ module.exports = {
                             }
                         }),
                         StringSelectMenuOptionBuilder.from({
+                            label: 'Arcanist',
+                            description: 'Mark yourself as an Arcanist.',
+                            value: 'arc',
+                            emoji: {
+                                name: "arc",
+                                id: "1166794065178787860"
+                            }
+                        }),
+                        StringSelectMenuOptionBuilder.from({
                             label: 'Templar',
                             description: 'Mark yourself as a Templar.',
                             value: 'templar',
