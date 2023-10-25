@@ -1,0 +1,30 @@
+# fly.toml app configuration file generated for artaeum-raid-tool on 2023-10-24T13:26:30-06:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "artaeum-raid-tool"
+primary_region = "sea"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[experimental]
+  auto_rollback = true
+
+[build]
+  builder = "paketobuildpacks/builder:base"
+  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
+
+
+[processes]
+  worker = "npm start"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+  ports = []
+  processes = ["worker"]
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20

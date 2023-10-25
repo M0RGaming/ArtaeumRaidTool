@@ -2,5 +2,5 @@ sourceVars.sh
 node_modules/
 .dockerignore
 Dockerfile
-fly.toml
+#fly.toml
 .idea/
