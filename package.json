@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chrono-node": "^2.6.2",
-    "discord.js": "^14.9.0"
+    "chrono-node": "^2.7.8",
+    "discord.js": "^14.18.0"
   }
 }
